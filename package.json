@@ -5,8 +5,10 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "node app.js",
-    "start": "lite-server"
+    "dev": "nodemon app.js",
+    "start": "lite-server",
+    "build": "npx tsc functions.ts && node functions.js",
+    "type": "npx tsc leet && node leet"
   },
   "author": "",
   "license": "ISC",

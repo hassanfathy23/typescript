@@ -167,21 +167,23 @@ const alert = () => {
   }
 };
 
-const confirmationCode = (min, max) => {
+const confirmationCode = (min: number, max: number) => {
   return Math.floor(Math.random() * (max - min) - min) + min;
 };
 
+type dataObjectInterface = { Count: number; Percentage: number; Description: string; Name: string }[]
+
 const amount = [1500, 2500, 3500, 10500];
-const dataObject = [
+const dataObject: dataObjectInterface = [
   { Count: 1, Percentage: 10, Description: "test 1", Name: "bob" },
   { Count: 2, Percentage: 45, Description: "test 2", Name: "bob 2" },
   { Count: 5, Percentage: 19, Description: "test 3", Name: "bob 3" },
   { Count: 10, Percentage: 50, Description: "test 4", Name: "bob 4" },
 ];
 
-for (let i = 0; i < dataObject.length; i++) {
-  dataObject[i].amount = amount[i];
-}
+// for (let i = 0; i < dataObject.length; i++) {
+//   dataObject[i].amount = amount[i];
+// }
 
 // console.log(dataObject)
 
@@ -189,11 +191,4 @@ const colors = ["red", "green", "yellow"];
 
 // colors.forEach((color, index, x) => console.log(color, index, x));
 
-const nums = [1, 2, 3]
-const doubledNums = []
-
-nums.forEach(v => {
-    doubledNums.push(v * 2)
-})
-
-console.log(doubledNums)
+//
