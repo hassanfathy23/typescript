@@ -1,3 +1,124 @@
+
+const applyOperations = (nums: number[]) => {
+  for(let i = 0; i < nums.length - 1; i++) {
+    if(nums[i + 1] === nums[i]) {
+      nums[i] *= 2
+      nums[i + 1] = 0
+    }
+  }
+
+  let index = 0
+
+  nums.forEach(num => {
+    if(num !== 0) {
+      nums[index++] = num
+    }
+  })
+
+  while(index < nums.length) {
+    nums[index++] = 0
+  }
+
+  return nums
+}
+
+console.log(applyOperations([1, 2, 2, 1, 1, 0]))
+console.log(applyOperations([1, 0]))
+
+
+
+var removeDuplicates = function(nums: number[]) {
+    let currentIndex = 1
+    for(let i = 1; i < nums.length; i++) {
+      if(nums[i - 1] != nums[i]) {
+        nums[currentIndex] = nums[i]
+        currentIndex++
+      }
+    }
+
+    return currentIndex
+};
+
+// console.log(removeDuplicates([1, 1, 2]))
+// console.log(removeDuplicates([0, 0, 1, 1, 1, 2, 2, 3, 3, 4]))
+
+
+var isValid = function(s: string){
+  let stack = s.split('');
+  if(stack.length % 2 != 0) return false;
+  let arr: string[] = []
+  while(stack.length)
+  {
+      let topElem = stack.pop();
+      if(topElem === ')' || topElem === '}' || topElem === ']')
+      {
+          arr.push(topElem);
+      }
+      else
+      { 
+          let temp = arr.pop();
+          if(!((topElem==='(' && temp ===')') || (topElem==='[' && temp ===']') || (topElem==='{' && temp ==='}')))
+          {
+               return false;
+          }
+      }
+  }
+  if(arr.length) return false;
+  return true
+}
+
+// console.log(isValid("()"));
+// console.log(isValid("(){}[]"));
+// console.log(isValid("[)"));
+
+var canCompleteCircuit = function (gas: number[], cost: number[]) {
+  let n = gas.length;
+  let gasInTank;
+
+  let start = n - 1;
+  let end = 0;
+
+  gasInTank = gas[start] - cost[start];
+  while (start >= end) {
+    if (gasInTank >= 0) {
+      gasInTank += gas[end] - cost[end];
+      end++;
+    } else {
+      start--;
+      gasInTank += gas[start] - cost[start];
+    }
+  }
+  return gasInTank >= 0 ? start : -1;
+};
+
+// console.log(canCompleteCircuit([1,2,3,4,5], [3,4,5,1,2]))
+// console.log(canCompleteCircuit([2,3,4], [3,4,3]))
+
+// day 31 - longest common prefix
+// you will be givin array of strings and you need to return a string for the
+// longest common prefix you find or an empty strings if none found
+// example 1: ["flower", "flight", "fly"] return "fl" because it exist
+// at the start of each string in the array
+// example 2: ["car", "dog", "racecar"] return "" because they don't share
+// a prefix
+
+var longestCommonPrefix = function (strs: string[]) {
+  if (!strs.length) {
+    return "";
+  }
+
+  for (let i = 0; i <= strs[0].length; i++) {
+    if (!strs.every((string) => string[i] === strs[0][i])) {
+      return strs[0].slice(0, i);
+    }
+  }
+
+  return strs[0];
+};
+
+// console.log(longestCommonPrefix(["flower", "flight", "fly"])); // return "fl"
+// console.log(longestCommonPrefix(["car", "dog", "racecar"])); // return ""
+
 var romanToInt = function (s: string) {
   let count = 0;
 
@@ -68,9 +189,9 @@ var romanToInt = function (s: string) {
   return count;
 };
 
-console.log(romanToInt("III"));
-console.log(romanToInt("LVIII"));
-console.log(romanToInt("MCMXCIV"));
+// console.log(romanToInt("III"));
+// console.log(romanToInt("LVIII"));
+// console.log(romanToInt("MCMXCIV"));
 
 var isPalindrome = function (x: number) {
   let newX = Number(x.toString().split("").reverse().join(""));
@@ -85,6 +206,13 @@ var isPalindrome = function (x: number) {
 // console.log(isPalindrome(121))
 // console.log(isPalindrome(-121))
 // console.log(isPalindrome(10))
+
+// day 30 - return array of indexes of values that equal target value
+// you will be givin an array of numbers and target number as arguments
+// and you need to return an array of indexes of the values that equals
+// the target value when sumed up
+// example twoSum([2, 3, 4], 6) output >>> [0, 2] because 2 + 4 = 6
+// and the index of 2 is 0, index of 4 is 2.
 
 var twoSum = function (nums: number[], target: number) {
   let output;
@@ -102,6 +230,6 @@ var twoSum = function (nums: number[], target: number) {
   return output;
 };
 
-//   console.log(twoSum([2, 3, 4], 6))
-//   console.log(twoSum([2, 3], 5))
-//   console.log(twoSum([2, 3, 4, 9], 11))
+// console.log(twoSum([2, 3, 4], 6)) // [0, 2]
+// console.log(twoSum([2, 3], 5)) // [0, 1]
+// console.log(twoSum([2, 3, 4, 9], 11)) // [0, 3]
