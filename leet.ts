@@ -1,28 +1,47 @@
+// Day 33 - sort two array and find median and return it
+// you will be given 2 arrays of numbers as arguments, you need
+// to concatenate them into one array and sort them and you
+// need to return the median value
+// example: [1, 3], [2] return 2 because [1, 2, 3] 2 is the median
+// [1, 3], [2, 4] return 2.5 because [1, 2, 3, 4] (2 + 3) / 2 = 2.5
+
 var findMedianSortedArrays = function(nums1: number[], nums2: number[]) {
   const swap = (arr: number[], i: number, j: number) => {
-    let temp = arr[i]
-    arr[i] = arr[j]
-    arr[j] = temp
+    let temp = arr[i];
+    arr[i] = arr[j];
+    arr[j] = temp;
 
-    return arr
-  }
+    return arr;
+  };
 
-  let mixedArray = nums1.concat(nums2)
+  let mixedArray = nums1.concat(nums2);
   let result: number[] = [];
 
-  for(let i = 0; i < mixedArray.length; i++) {
-      for(let j = 0; j < mixedArray.length - 1; j++) {
-          if(mixedArray[j] > mixedArray[j + 1]) {
-              result = swap(mixedArray, j, j + 1)
-          }
+  if (mixedArray.length > 1) {
+    for (let i = 0; i < mixedArray.length; i++) {
+      for (let j = 0; j < mixedArray.length - 1; j++) {
+        if (mixedArray[j] > mixedArray[j + 1]) {
+          result = swap(mixedArray, j, j + 1);
+        }
+        result = mixedArray;
       }
+    }
+  } else {
+    result = mixedArray;
   }
 
-  console.log(result[result.length / 2])
+  if (result.length % 2 !== 0) {
+    if (result.length === 1) {
+      return result[0];
+    }
+    return result[(result.length - 1) / 2];
+  } else {
+    return (result[result.length / 2] + result[(result.length - 2) / 2]) / 2;
+  }
 };
 
-findMedianSortedArrays([1, 3], [2])
-findMedianSortedArrays([1, 3], [2, 4])
+findMedianSortedArrays([1, 3], [2]) // returns 2
+findMedianSortedArrays([1, 3], [2, 4]) //returns 2.5
 
 var reverseNumber = function(x: number) {
   let newX = x
