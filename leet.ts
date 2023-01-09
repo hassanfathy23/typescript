@@ -1,3 +1,50 @@
+var findMedianSortedArrays = function(nums1: number[], nums2: number[]) {
+  const swap = (arr: number[], i: number, j: number) => {
+    let temp = arr[i]
+    arr[i] = arr[j]
+    arr[j] = temp
+
+    return arr
+  }
+
+  let mixedArray = nums1.concat(nums2)
+  let result: number[] = [];
+
+  for(let i = 0; i < mixedArray.length; i++) {
+      for(let j = 0; j < mixedArray.length - 1; j++) {
+          if(mixedArray[j] > mixedArray[j + 1]) {
+              result = swap(mixedArray, j, j + 1)
+          }
+      }
+  }
+
+  console.log(result[result.length / 2])
+};
+
+findMedianSortedArrays([1, 3], [2])
+findMedianSortedArrays([1, 3], [2, 4])
+
+var reverseNumber = function(x: number) {
+  let newX = x
+    if(x < 0) newX = x * -1
+
+    var str: string = newX.toString().split('').reverse().join('');
+
+    var reversed = parseInt(str);
+    if(reversed > Math.pow(2, 31)) return 0
+
+    if (x < 0) {
+        return reversed * -1;
+    }
+    else {
+        return reversed;
+    }
+};
+
+// console.log(reverseNumber(123))
+// console.log(reverseNumber(-173))
+// console.log(reverseNumber(-27364537263))
+
 
 const applyOperations = (nums: number[]) => {
   for(let i = 0; i < nums.length - 1; i++) {
@@ -22,8 +69,8 @@ const applyOperations = (nums: number[]) => {
   return nums
 }
 
-console.log(applyOperations([1, 2, 2, 1, 1, 0]))
-console.log(applyOperations([1, 0]))
+// console.log(applyOperations([1, 2, 2, 1, 1, 0]))
+// console.log(applyOperations([1, 0]))
 
 
 
@@ -71,6 +118,14 @@ var isValid = function(s: string){
 // console.log(isValid("(){}[]"));
 // console.log(isValid("[)"));
 
+// Day 32 - gas station algorithm
+// you will be given 2 array as arguments, the first is array of
+// numbers refer to the amount of gas you can fill you car from this certain
+// gas station and the other array numbers refer to the cost that you afford
+// to reach the next gas station, you need to write an algorithm to return the index
+// of the gas station you need to start from so you can pass by every gas station
+// of the five or return -1 if it's not possible(your car is out of gas)\
+
 var canCompleteCircuit = function (gas: number[], cost: number[]) {
   let n = gas.length;
   let gasInTank;
@@ -91,8 +146,8 @@ var canCompleteCircuit = function (gas: number[], cost: number[]) {
   return gasInTank >= 0 ? start : -1;
 };
 
-// console.log(canCompleteCircuit([1,2,3,4,5], [3,4,5,1,2]))
-// console.log(canCompleteCircuit([2,3,4], [3,4,3]))
+// console.log(canCompleteCircuit([1,2,3,4,5], [3,4,5,1,2])) /// returns 3
+// console.log(canCompleteCircuit([2,3,4], [3,4,3])) /// returns -1
 
 // day 31 - longest common prefix
 // you will be givin array of strings and you need to return a string for the
