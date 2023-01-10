@@ -1,3 +1,47 @@
+var lengthOfLastWord = function (s) {
+    var newS = s.trim().split(' ');
+    var lastLength = newS[newS.length - 1].length;
+    console.log(lastLength);
+    return lastLength;
+};
+// lengthOfLastWord("Hello World");
+// lengthOfLastWord("   fly me   to   the moon  ");
+// lengthOfLastWord("luffy is still joyboy");
+var searchInsert = function (nums, target) {
+    var result = 0;
+    for (var i = 0; i < nums.length; i++) {
+        if (nums[i] === target) {
+            result = i;
+        }
+        if (nums[i] < target) {
+            if (nums[i + 1] > target || !nums[i + 1]) {
+                result = i + 1;
+            }
+        }
+    }
+    console.log(result);
+    return result;
+};
+// searchInsert([1, 3, 5, 6], 5);
+// searchInsert([1, 3, 5, 6], 2);
+// searchInsert([1, 3, 5, 6], 7);
+var removeElement = function (nums, val) {
+    var j = 0;
+    for (var i = 0; i < nums.length; i++) {
+        if (nums[i] !== val) {
+            nums[j++] = nums[i];
+        }
+    }
+    return j;
+};
+// removeElement([3, 2, 2, 3], 3);
+// removeElement([0, 1, 2, 2, 3, 0, 4, 2], 2);
+// Day 33 - sort two array and find median and return it
+// you will be given 2 arrays of numbers as arguments, you need
+// to concatenate them into one array and sort them and you
+// need to return the median value
+// example: [1, 3], [2] return 2 because [1, 2, 3] 2 is the median
+// [1, 3], [2, 4] return 2.5 because [1, 2, 3, 4] (2 + 3) / 2 = 2.5
 var findMedianSortedArrays = function (nums1, nums2) {
     var swap = function (arr, i, j) {
         var temp = arr[i];
@@ -30,13 +74,13 @@ var findMedianSortedArrays = function (nums1, nums2) {
         return (result[result.length / 2] + result[(result.length - 2) / 2]) / 2;
     }
 };
-findMedianSortedArrays([1, 3], [2]);
-findMedianSortedArrays([1, 3], [2, 4]);
+findMedianSortedArrays([1, 3], [2]); // returns 2
+findMedianSortedArrays([1, 3], [2, 4]); //returns 2.5
 var reverseNumber = function (x) {
     var newX = x;
     if (x < 0)
         newX = x * -1;
-    var str = newX.toString().split('').reverse().join('');
+    var str = newX.toString().split("").reverse().join("");
     var reversed = parseInt(str);
     if (reversed > Math.pow(2, 31))
         return 0;
@@ -83,18 +127,20 @@ var removeDuplicates = function (nums) {
 // console.log(removeDuplicates([1, 1, 2]))
 // console.log(removeDuplicates([0, 0, 1, 1, 1, 2, 2, 3, 3, 4]))
 var isValid = function (s) {
-    var stack = s.split('');
+    var stack = s.split("");
     if (stack.length % 2 != 0)
         return false;
     var arr = [];
     while (stack.length) {
         var topElem = stack.pop();
-        if (topElem === ')' || topElem === '}' || topElem === ']') {
+        if (topElem === ")" || topElem === "}" || topElem === "]") {
             arr.push(topElem);
         }
         else {
             var temp = arr.pop();
-            if (!((topElem === '(' && temp === ')') || (topElem === '[' && temp === ']') || (topElem === '{' && temp === '}'))) {
+            if (!((topElem === "(" && temp === ")") ||
+                (topElem === "[" && temp === "]") ||
+                (topElem === "{" && temp === "}"))) {
                 return false;
             }
         }

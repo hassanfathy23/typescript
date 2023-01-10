@@ -1,3 +1,57 @@
+
+// Day 34 - get the length of the last word in a string
+// you will be given a string and you need to return the length
+// of the last word in it, you need to put in consideration the
+// white spaces at the end and start of the string
+// example: "Hello World" returns 5 because the word "world"
+// contains 5 letters
+
+var lengthOfLastWord = function(s: string) {
+    let newS: string[] = s.trim().split(' ')
+    let lastLength = newS[newS.length - 1].length
+    console.log(lastLength)
+    return lastLength
+};
+
+lengthOfLastWord("Hello World") // returns 5
+lengthOfLastWord("   fly me   to   the moon  ") // returns 4
+lengthOfLastWord("luffy is still joyboy") // returns 6
+
+var searchInsert = function (nums: number[], target: number) {
+  let result: number = 0;
+  for (let i = 0; i < nums.length; i++) {
+    if (nums[i] === target) {
+      result = i;
+    }
+    if(nums[i] < target) {
+      if(nums[i + 1] > target || !nums[i + 1]) {
+        result = i + 1
+      }
+    }
+  }
+  console.log(result)
+  return result
+};
+
+// searchInsert([1, 3, 5, 6], 5);
+// searchInsert([1, 3, 5, 6], 2);
+// searchInsert([1, 3, 5, 6], 7);
+
+const removeElement = function (nums: number[], val: number) {
+  let j = 0;
+
+  for (let i = 0; i < nums.length; i++) {
+    if (nums[i] !== val) {
+      nums[j++] = nums[i];
+    }
+  }
+
+  return j;
+};
+
+// removeElement([3, 2, 2, 3], 3);
+// removeElement([0, 1, 2, 2, 3, 0, 4, 2], 2);
+
 // Day 33 - sort two array and find median and return it
 // you will be given 2 arrays of numbers as arguments, you need
 // to concatenate them into one array and sort them and you
@@ -5,7 +59,7 @@
 // example: [1, 3], [2] return 2 because [1, 2, 3] 2 is the median
 // [1, 3], [2, 4] return 2.5 because [1, 2, 3, 4] (2 + 3) / 2 = 2.5
 
-var findMedianSortedArrays = function(nums1: number[], nums2: number[]) {
+var findMedianSortedArrays = function (nums1: number[], nums2: number[]) {
   const swap = (arr: number[], i: number, j: number) => {
     let temp = arr[i];
     arr[i] = arr[j];
@@ -40,98 +94,94 @@ var findMedianSortedArrays = function(nums1: number[], nums2: number[]) {
   }
 };
 
-findMedianSortedArrays([1, 3], [2]) // returns 2
-findMedianSortedArrays([1, 3], [2, 4]) //returns 2.5
+findMedianSortedArrays([1, 3], [2]); // returns 2
+findMedianSortedArrays([1, 3], [2, 4]); //returns 2.5
 
-var reverseNumber = function(x: number) {
-  let newX = x
-    if(x < 0) newX = x * -1
+var reverseNumber = function (x: number) {
+  let newX = x;
+  if (x < 0) newX = x * -1;
 
-    var str: string = newX.toString().split('').reverse().join('');
+  var str: string = newX.toString().split("").reverse().join("");
 
-    var reversed = parseInt(str);
-    if(reversed > Math.pow(2, 31)) return 0
+  var reversed = parseInt(str);
+  if (reversed > Math.pow(2, 31)) return 0;
 
-    if (x < 0) {
-        return reversed * -1;
-    }
-    else {
-        return reversed;
-    }
+  if (x < 0) {
+    return reversed * -1;
+  } else {
+    return reversed;
+  }
 };
 
 // console.log(reverseNumber(123))
 // console.log(reverseNumber(-173))
 // console.log(reverseNumber(-27364537263))
 
-
 const applyOperations = (nums: number[]) => {
-  for(let i = 0; i < nums.length - 1; i++) {
-    if(nums[i + 1] === nums[i]) {
-      nums[i] *= 2
-      nums[i + 1] = 0
+  for (let i = 0; i < nums.length - 1; i++) {
+    if (nums[i + 1] === nums[i]) {
+      nums[i] *= 2;
+      nums[i + 1] = 0;
     }
   }
 
-  let index = 0
+  let index = 0;
 
-  nums.forEach(num => {
-    if(num !== 0) {
-      nums[index++] = num
+  nums.forEach((num) => {
+    if (num !== 0) {
+      nums[index++] = num;
     }
-  })
+  });
 
-  while(index < nums.length) {
-    nums[index++] = 0
+  while (index < nums.length) {
+    nums[index++] = 0;
   }
 
-  return nums
-}
+  return nums;
+};
 
 // console.log(applyOperations([1, 2, 2, 1, 1, 0]))
 // console.log(applyOperations([1, 0]))
 
-
-
-var removeDuplicates = function(nums: number[]) {
-    let currentIndex = 1
-    for(let i = 1; i < nums.length; i++) {
-      if(nums[i - 1] != nums[i]) {
-        nums[currentIndex] = nums[i]
-        currentIndex++
-      }
+var removeDuplicates = function (nums: number[]) {
+  let currentIndex = 1;
+  for (let i = 1; i < nums.length; i++) {
+    if (nums[i - 1] != nums[i]) {
+      nums[currentIndex] = nums[i];
+      currentIndex++;
     }
+  }
 
-    return currentIndex
+  return currentIndex;
 };
 
 // console.log(removeDuplicates([1, 1, 2]))
 // console.log(removeDuplicates([0, 0, 1, 1, 1, 2, 2, 3, 3, 4]))
 
-
-var isValid = function(s: string){
-  let stack = s.split('');
-  if(stack.length % 2 != 0) return false;
-  let arr: string[] = []
-  while(stack.length)
-  {
-      let topElem = stack.pop();
-      if(topElem === ')' || topElem === '}' || topElem === ']')
-      {
-          arr.push(topElem);
+var isValid = function (s: string) {
+  let stack = s.split("");
+  if (stack.length % 2 != 0) return false;
+  let arr: string[] = [];
+  while (stack.length) {
+    let topElem = stack.pop();
+    if (topElem === ")" || topElem === "}" || topElem === "]") {
+      arr.push(topElem);
+    } else {
+      let temp = arr.pop();
+      if (
+        !(
+          (topElem === "(" && temp === ")") ||
+          (topElem === "[" && temp === "]") ||
+          (topElem === "{" && temp === "}")
+        )
+      ) {
+        return false;
       }
-      else
-      { 
-          let temp = arr.pop();
-          if(!((topElem==='(' && temp ===')') || (topElem==='[' && temp ===']') || (topElem==='{' && temp ==='}')))
-          {
-               return false;
-          }
-      }
+    }
   }
-  if(arr.length) return false;
-  return true
-}
+  if (arr.length) return false;
+  return true;
+};
 
 // console.log(isValid("()"));
 // console.log(isValid("(){}[]"));
