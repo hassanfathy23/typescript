@@ -1,12 +1,39 @@
+var convert = function (s, numRows) {
+    if (!s || numRows <= 0)
+        return '';
+    if (numRows === 1)
+        return s;
+    var result = '';
+    var step = 2 * numRows - 2;
+    for (var i = 0; i < numRows; i++) {
+        for (var j = i; j < s.length; j += step) {
+            result += s[j];
+            if (i != 0 && i != numRows - 1 && (j + step - 2 * i) < s.length) {
+                result += s[j + step - 2 * i];
+            }
+        }
+    }
+    console.log(result);
+    return result;
+};
+convert("PAYPALISHIRING", 3);
+// convert("PAYPALISHIRING", 4);
+// convert("A", 1);
+// Day 34 - get the length of the last word in a string
+// you will be given a string and you need to return the length
+// of the last word in it, you need to put in consideration the
+// white spaces at the end and start of the string
+// example: "Hello World" returns 5 because the word "world"
+// contains 5 letters
 var lengthOfLastWord = function (s) {
-    var newS = s.trim().split(' ');
+    var newS = s.trim().split(" ");
     var lastLength = newS[newS.length - 1].length;
     console.log(lastLength);
     return lastLength;
 };
-// lengthOfLastWord("Hello World");
-// lengthOfLastWord("   fly me   to   the moon  ");
-// lengthOfLastWord("luffy is still joyboy");
+// lengthOfLastWord("Hello World") // returns 5
+// lengthOfLastWord("   fly me   to   the moon  ") // returns 4
+// lengthOfLastWord("luffy is still joyboy") // returns 6
 var searchInsert = function (nums, target) {
     var result = 0;
     for (var i = 0; i < nums.length; i++) {

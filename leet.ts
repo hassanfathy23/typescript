@@ -1,3 +1,27 @@
+var convert = function(s: string, numRows: number) {
+    if(!s || numRows <= 0) return ''
+    if(numRows === 1) return s
+
+    let result: string = ''
+    const step = 2 * numRows - 2
+
+    for(let i = 0; i < numRows; i++) {
+      for(let j = i; j < s.length; j += step) {
+        result += s[j]
+
+        if(i != 0 && i != numRows - 1 && (j + step - 2 * i) < s.length) {
+          result += s[j + step - 2 * i]
+        }
+      }
+    }
+
+    console.log(result)
+    return result
+};
+
+convert("PAYPALISHIRING", 3);
+// convert("PAYPALISHIRING", 4);
+// convert("A", 1);
 
 // Day 34 - get the length of the last word in a string
 // you will be given a string and you need to return the length
@@ -6,16 +30,16 @@
 // example: "Hello World" returns 5 because the word "world"
 // contains 5 letters
 
-var lengthOfLastWord = function(s: string) {
-    let newS: string[] = s.trim().split(' ')
-    let lastLength = newS[newS.length - 1].length
-    console.log(lastLength)
-    return lastLength
+var lengthOfLastWord = function (s: string) {
+  let newS: string[] = s.trim().split(" ");
+  let lastLength = newS[newS.length - 1].length;
+  console.log(lastLength);
+  return lastLength;
 };
 
-lengthOfLastWord("Hello World") // returns 5
-lengthOfLastWord("   fly me   to   the moon  ") // returns 4
-lengthOfLastWord("luffy is still joyboy") // returns 6
+// lengthOfLastWord("Hello World") // returns 5
+// lengthOfLastWord("   fly me   to   the moon  ") // returns 4
+// lengthOfLastWord("luffy is still joyboy") // returns 6
 
 var searchInsert = function (nums: number[], target: number) {
   let result: number = 0;
@@ -23,14 +47,14 @@ var searchInsert = function (nums: number[], target: number) {
     if (nums[i] === target) {
       result = i;
     }
-    if(nums[i] < target) {
-      if(nums[i + 1] > target || !nums[i + 1]) {
-        result = i + 1
+    if (nums[i] < target) {
+      if (nums[i + 1] > target || !nums[i + 1]) {
+        result = i + 1;
       }
     }
   }
-  console.log(result)
-  return result
+  console.log(result);
+  return result;
 };
 
 // searchInsert([1, 3, 5, 6], 5);
