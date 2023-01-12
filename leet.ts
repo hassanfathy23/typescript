@@ -1,25 +1,89 @@
-var convert = function(s: string, numRows: number) {
-    if(!s || numRows <= 0) return ''
-    if(numRows === 1) return s
+console.log("complied")
 
-    let result: string = ''
-    const step = 2 * numRows - 2
+var maxArea = (height: number[]) => {
+  let max: number = 0
+  let left: number = 0
+  let right: number = height.length - 1
 
-    for(let i = 0; i < numRows; i++) {
-      for(let j = i; j < s.length; j += step) {
-        result += s[j]
+  while(left < right) {
+    let total = (right - left) * Math.min(height[right], height[left])
+    max = Math.max(total, max)
 
-        if(i != 0 && i != numRows - 1 && (j + step - 2 * i) < s.length) {
-          result += s[j + step - 2 * i]
-        }
-      }
+    if(height[right] > height[left]) {
+      left++
+    } else {
+      right--
     }
+  }
 
-    console.log(result)
-    return result
+  console.log(max)
+  return max
+}
+
+// maxArea([1,8,6,2,5,4,8,3,7])
+// maxArea([1,1])
+// maxArea()
+
+var myAtoi = (str: string) => {
+  if (!str) return 0;
+
+  const INT_MAX = 2147483647;
+  const INT_MIN = -2147483648;
+
+  str = str.trim();
+
+  let i = 0;
+  const isNegative = str[0] === "-";
+  const isPositive = str[0] === "+";
+
+  if (isNegative || isPositive) {
+    i++;
+  }
+
+  let number: number = 0
+  while(i < str.length && str[i] >= "0" && str[i] <= "9") {
+    number = number * 10 + (+str[i] - +"0");
+    i++
+  }
+
+  number = isNegative ? -number: number
+
+  if(number < INT_MIN) {
+    return INT_MIN
+  } else if(number > INT_MAX) {
+    return INT_MAX
+  } else {
+    console.log(number)
+    return number
+  }
 };
 
-convert("PAYPALISHIRING", 3);
+// myAtoi("1234");
+// myAtoi("  1234");
+// myAtoi("  -1234 word");
+
+var convert = function (s: string, numRows: number) {
+  if (!s || numRows <= 0) return "";
+  if (numRows === 1) return s;
+
+  let result: string = "";
+  const step = 2 * numRows - 2;
+
+  for (let i = 0; i < numRows; i++) {
+    for (let j = i; j < s.length; j += step) {
+      result += s[j];
+
+      if (i != 0 && i != numRows - 1 && j + step - 2 * i < s.length) {
+        result += s[j + step - 2 * i];
+      }
+    }
+  }
+
+  console.log(result);
+  return result;
+};
+
+// convert("PAYPALISHIRING", 3);
 // convert("PAYPALISHIRING", 4);
 // convert("A", 1);
 
@@ -267,6 +331,20 @@ var longestCommonPrefix = function (strs: string[]) {
 // console.log(longestCommonPrefix(["flower", "flight", "fly"])); // return "fl"
 // console.log(longestCommonPrefix(["car", "dog", "racecar"])); // return ""
 
+// Day 35 - roman integer
+// you will be given a string as argument and you need to turn it
+// from roman integer into a normal one.
+// I             1
+// V             5
+// X             10
+// L             50
+// C             100
+// D             500
+// M             1000
+// I can be placed before V (5) and X (10) to make 4 and 9. 
+// X can be placed before L (50) and C (100) to make 40 and 90. 
+// C can be placed before D (500) and M (1000) to make 400 and 900.
+
 var romanToInt = function (s: string) {
   let count = 0;
 
@@ -337,9 +415,9 @@ var romanToInt = function (s: string) {
   return count;
 };
 
-// console.log(romanToInt("III"));
-// console.log(romanToInt("LVIII"));
-// console.log(romanToInt("MCMXCIV"));
+console.log(romanToInt("III")); // 3
+console.log(romanToInt("LVIII")); // 58
+console.log(romanToInt("MCMXCIV")); //1994
 
 var isPalindrome = function (x: number) {
   let newX = Number(x.toString().split("").reverse().join(""));
