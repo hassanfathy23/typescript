@@ -1,5 +1,28 @@
 console.log("complied")
 
+// Day 37 - plusOne
+// you have a large integer represented in an array and you
+// need to increment the number by one and return it as array
+// example: [1, 2, 3] returns [1, 2, 4] because the array
+// [1, 2, 3] represents the number 123 and 123 + 1 = 124
+// so we return it as array [1, 2, 4]
+// you also need to put in consideration big integers that 
+// will be inaccurate when adding up 1 to them
+
+var plusOne = function(digits: number[]) {
+    let number: bigint = BigInt(digits.join('')) // number = 123
+
+    number = BigInt(1) + number // number = 124
+
+    let newArr = number.toString().split('').map(Number) // newArr = [1, 2, 4]
+
+    return newArr
+};
+
+plusOne([1,2,3]) // returns [1, 2, 4]
+plusOne([4,3,2,1]) // returns [4, 3, 2, 2]
+plusOne([9]) // returns [1, 0]
+
 var maxArea = (height: number[]) => {
   let max: number = 0
   let left: number = 0
@@ -105,6 +128,17 @@ var lengthOfLastWord = function (s: string) {
 // lengthOfLastWord("   fly me   to   the moon  ") // returns 4
 // lengthOfLastWord("luffy is still joyboy") // returns 6
 
+// day 36 - search insert
+// you will be given sorted array of numbers and target number as arguments
+// and you need to return the index of the number in the array if
+// found or the index the number was supposed to be in if it was
+// in the array
+// example 1: nums = [1, 3, 5, 6], target = 5 returns 2 because the index
+// of the target value 5 in the array nums is 2
+// example 2: nums = [1, 3, 5, 6] target = 2 returns 1 because the target
+// value 2 is not present in the array but if it was it'd be after the value
+// 1 and before the value 3 in the secound index (1)
+
 var searchInsert = function (nums: number[], target: number) {
   let result: number = 0;
   for (let i = 0; i < nums.length; i++) {
@@ -121,9 +155,9 @@ var searchInsert = function (nums: number[], target: number) {
   return result;
 };
 
-// searchInsert([1, 3, 5, 6], 5);
-// searchInsert([1, 3, 5, 6], 2);
-// searchInsert([1, 3, 5, 6], 7);
+// searchInsert([1, 3, 5, 6], 5); // returns 2
+// searchInsert([1, 3, 5, 6], 2); // returns 1
+// searchInsert([1, 3, 5, 6], 7); // returns 4
 
 const removeElement = function (nums: number[], val: number) {
   let j = 0;
@@ -415,9 +449,9 @@ var romanToInt = function (s: string) {
   return count;
 };
 
-console.log(romanToInt("III")); // 3
-console.log(romanToInt("LVIII")); // 58
-console.log(romanToInt("MCMXCIV")); //1994
+// console.log(romanToInt("III")); // 3
+// console.log(romanToInt("LVIII")); // 58
+// console.log(romanToInt("MCMXCIV")); //1994
 
 var isPalindrome = function (x: number) {
   let newX = Number(x.toString().split("").reverse().join(""));
