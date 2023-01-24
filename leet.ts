@@ -19,9 +19,9 @@ var plusOne = function(digits: number[]) {
     return newArr
 };
 
-plusOne([1,2,3]) // returns [1, 2, 4]
-plusOne([4,3,2,1]) // returns [4, 3, 2, 2]
-plusOne([9]) // returns [1, 0]
+// plusOne([1,2,3]) // returns [1, 2, 4]
+// plusOne([4,3,2,1]) // returns [4, 3, 2, 2]
+// plusOne([9]) // returns [1, 0]
 
 var maxArea = (height: number[]) => {
   let max: number = 0
