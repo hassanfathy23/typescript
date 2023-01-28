@@ -1,46 +1,63 @@
-"use strict";
+import express from "express";
+// import mongoose from "mongoose";
+import path from 'path'
+import fs from 'fs'
+import chalk from 'chalk'
+import ProgressBar from "progress";
 
-// 5 / 28
+const app = express()
+const port = 3000
 
-function myConcat(arg) {
-    let result = ''
+const bar = new ProgressBar(':bar', {total: 10})
 
-    for(let i = 1; i < arguments.length; i++) {
-        result += arguments[i] + arg
+const timer = setInterval(() => {
+    bar.tick()
+
+    if(bar.complete) {
+        clearInterval(timer)
     }
+}, 100)
 
-    console.log(result)
-    return result
-}
+// const nums = [1, 2, 3, 4]
 
-myConcat(',', 'red', 'orange', 'blue');
+// console.log('this is port %d', port)
+console.log(chalk.green("this is red text"))
+
+// const writeHello = () => console.log("hello")
+
+// const measureTime = () => {
+// console.time("Write Hello") // label must be identical
+
+// writeHello()
+
+// console.timeEnd("Write Hello") // label must be identical
+// }
+
+// measureTime()
 
 
-// const fnOut = outside(4)
-// const fnIn = fnOut(5)
-
-// function outside(n) {
-//     function inside(x) {
-//         console.log({n: n, x: x})
-//         return n + x
-//     }
-
-//     console.log({n: n})
-//     return inside
+// try {
+//     const file = path.resolve('dist')
+//     const openDir = fs.readdirSync(file)
+//     console.log(openDir)
+// } catch (error) {
+//     console.log(error)
 // }
 
 
-// (function() {
+// app.get('/', (req, res) => {
+//     res.status(200).json({msg: "worked"})
+// })
 
-//     const obj = {
-//         name: 'hassan',
-//         age: 21,
-//         hobby: 'listening to music'
-//     }
+// main().catch((err) => {
+//     console.log(err)
+// })
 
-//    for(const [i, j] of Object.entries(obj)) {
-//     console.log(i, j)
-//    }
-// })()
+// async function main() {
+//     mongoose.connect()
+//     console.log(`connected to database`)
+// }
 
-const number = +'2' + +'4' // + unary plus
+// app.listen(port, () => {
+//     console.log("listening on port 3000")
+// })
